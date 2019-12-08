@@ -15,6 +15,10 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
+    @IBAction func buttonAction(_ sender: UIButton) {
+        let vc = PhotoViewController(nibName: "PhotoViewController", bundle: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
