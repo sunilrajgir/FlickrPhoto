@@ -14,6 +14,10 @@ internal class View: UIView {
     fileprivate let spaceBetweenCells = 10.0
     fileprivate let safeAreaSpace = 20.0
     fileprivate let loaderCellHeight = 50.0
+    fileprivate let noOfCollectionCellInEachRow = 3 // can be set int value
+    fileprivate let screenWidth = UIScreen.main.bounds.size.width
+    fileprivate var photoCellWidth : CGFloat = 0.0
+ 
 
     internal var controller : Controller!
     internal var viewModel : ViewModel!
@@ -28,9 +32,16 @@ internal class View: UIView {
         self.viewModel.delegate = self
         self.collectionView.register(UINib(nibName: "PhotoCollectionCell", bundle: nil), forCellWithReuseIdentifier: "PhotoCollectionCell")
         self.collectionView.register(UINib(nibName: "LoaderCollectionCell", bundle: nil), forCellWithReuseIdentifier: "LoaderCollectionCell")
+        self.calculateCellWidth()
         self.viewModel.initialSetup { () -> (Void) in
             self.setUp()
         }
+    }
+    
+    fileprivate func  calculateCellWidth() {
+        let leftRightPadding = 2*safeAreaSpace
+        let totalPaddingBetweenCell = (Double(noOfCollectionCellInEachRow)-1)*spaceBetweenCells
+        self.photoCellWidth = (screenWidth-CGFloat(leftRightPadding)-CGFloat(totalPaddingBetweenCell))/CGFloat(noOfCollectionCellInEachRow)
     }
     
     internal func loadNextPageData() {
@@ -72,11 +83,10 @@ extension View: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.row == (self.viewModel.numberOfItemsInSection(section: indexPath.section)-1) {
-             let width = UIScreen.main.bounds.size.width-CGFloat(2*safeAreaSpace)
+             let width = screenWidth-CGFloat(2*safeAreaSpace)
              return CGSize(width: width, height: CGFloat(loaderCellHeight))
         } else {
-            let width = (UIScreen.main.bounds.size.width-CGFloat(2*safeAreaSpace)-2*CGFloat(spaceBetweenCells))/3
-             return CGSize(width: width, height: width)
+            return CGSize(width: self.photoCellWidth, height: self.photoCellWidth)
         }
     }
     
