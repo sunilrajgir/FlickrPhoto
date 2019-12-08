@@ -1,6 +1,6 @@
 //
-//  PhotoViewModel.swift
-//  CollectionViewWithCleanCode
+//  ViewModel.swift
+//  FlickrPhoto
 //
 //  Created by sunil.kumar1 on 12/8/19.
 //  Copyright © 2019 sunil.kumar1. All rights reserved.
@@ -49,14 +49,14 @@ internal class ViewModel {
         if let photoModel = data as? FlickrModel {
             self.sourceArray = photoModel.photos!.photo
             self.totalRecords = Int(photoModel.photos?.total ?? "") ?? 0
-            self.viewDelegate?.showData(array: self.sourceArray)
+            self.viewDelegate?.showData()
         }
     }
     
     internal func showNextPageData(data:Any)  {
         if let photoModel = data as? FlickrModel {
             self.sourceArray.append(contentsOf: photoModel.photos!.photo)
-            self.viewDelegate?.showData(array: self.sourceArray)
+            self.viewDelegate?.showData()
         }
     }
 }

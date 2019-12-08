@@ -16,8 +16,8 @@ class ViewController: UIViewController {
     }
 
     @IBAction func buttonAction(_ sender: UIButton) {
-        let vc = PhotoViewController(nibName: "PhotoViewController", bundle: nil)
-        self.navigationController?.pushViewController(vc, animated: true)
+        let photoViewController = Builder.buildPhotoViewController()
+        self.navigationController?.pushViewController(photoViewController, animated: true)
     }
     
 }

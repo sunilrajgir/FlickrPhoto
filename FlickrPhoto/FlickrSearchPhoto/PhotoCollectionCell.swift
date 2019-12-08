@@ -1,8 +1,8 @@
 //
-//  PhotoCell.swift
-//  CollectionViewWithCleanCode
+//  PhotoCollectionCell.swift
+//  FlickrPhoto
 //
-//  Created by sunil.kumar1 on 12/7/19.
+//  Created by sunil.kumar1 on 12/8/19.
 //  Copyright © 2019 sunil.kumar1. All rights reserved.
 //
 
