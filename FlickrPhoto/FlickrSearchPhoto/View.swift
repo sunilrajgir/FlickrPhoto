@@ -43,7 +43,7 @@ internal class View: UIView {
     
 }
 
-// MARK: PhotoViewModelProtocol
+// MARK: ViewModelProtocol
 extension View : ViewModelProtocol {
     func showData() {
         DispatchQueue.main.async {
@@ -52,6 +52,7 @@ extension View : ViewModelProtocol {
     }
 }
 
+// MARK: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 extension View: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return self.viewModel.numberOfSection()

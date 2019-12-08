@@ -8,22 +8,22 @@
 
 import UIKit
 
-class Presenter {
+internal class Presenter {
     let viewModel: ViewModel
     
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
     }
-  
-    func resetToDefaultState() {
-        
+    
+    internal func showFetchedData(photoModel: Any?, error: Error?) {
+        if error == nil {
+            self.viewModel.showData(data: photoModel)
+        } else {
+            
+        }
     }
     
-    func showFetchedData(photoModel: Any) {
-        self.viewModel.showData(data: photoModel)
-    }
-    
-    func showNextPageData(photoModel:Any)  {
+    internal func showNextPageData(photoModel:Any?, error: Error?)  {
         self.viewModel.showNextPageData(data: photoModel)
     }
 }

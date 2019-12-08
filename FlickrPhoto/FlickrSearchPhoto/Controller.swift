@@ -28,7 +28,7 @@ internal class Controller {
         self.text = text
         if let url = self.getListUrl() {
             self.interactor.fetchData(url: url) {[weak self] (data, error) in
-                self?.presenter.showFetchedData(photoModel: data)
+                self?.presenter.showFetchedData(photoModel: data, error: error)
             }
         }
     }
@@ -37,7 +37,7 @@ internal class Controller {
         self.currentPage = currentPage+1;
         if let url = self.getListUrl() {
             self.interactor.fetchData(url: url) {[weak self] (data, error) in
-                self?.presenter.showNextPageData(photoModel: data)
+                self?.presenter.showNextPageData(photoModel: data, error: error)
             }
         }
     }

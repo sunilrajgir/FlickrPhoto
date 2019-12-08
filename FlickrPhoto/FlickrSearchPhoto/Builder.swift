@@ -8,8 +8,8 @@
 
 import UIKit
 
-class Builder {
-    class func buildPhotoViewController() -> PhotoViewController {
+internal class Builder {
+    internal class func buildPhotoViewController() -> PhotoViewController {
         let uiViewController = PhotoViewController(nibName: "PhotoViewController", bundle: nil)
         let dataGateway = DataFetcher()
         let interactor = Interactor(dataGateway: dataGateway, flickerModel: FlickrModel.self)

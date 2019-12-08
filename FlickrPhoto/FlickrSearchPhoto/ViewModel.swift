@@ -9,7 +9,8 @@
 import UIKit
 
 internal class ViewModel {
-    
+    /* There are only 4 state of view [default, loader, connection error, server error] */
+    /* for now we have only one state*/
     private var isCollectionViewHidden =  false
     private var totalRecords = 0
     
@@ -20,7 +21,8 @@ internal class ViewModel {
         self.isCollectionViewHidden = false
         completion()
     }
-    
+
+// MARK:- View Interface
     internal func getIsCollectionViewHidden() -> Bool {
         return self.isCollectionViewHidden
     }
@@ -44,8 +46,9 @@ internal class ViewModel {
             return nil
         }
     }
-            
-    internal func showData(data:Any) {
+    
+// MARK:- Presenter Interface
+    internal func showData(data:Any?) {
         if let photoModel = data as? FlickrModel {
             self.sourceArray = photoModel.photos!.photo
             self.totalRecords = Int(photoModel.photos?.total ?? "") ?? 0
@@ -53,10 +56,14 @@ internal class ViewModel {
         }
     }
     
-    internal func showNextPageData(data:Any)  {
+    internal func showNextPageData(data:Any?)  {
         if let photoModel = data as? FlickrModel {
             self.sourceArray.append(contentsOf: photoModel.photos!.photo)
             self.delegate?.showData()
         }
+    }
+    
+    internal func showError(error:Error) {
+        // out of score, will implement view 3 more state[loader, connection error, server error]
     }
 }
