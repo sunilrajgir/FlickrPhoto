@@ -85,7 +85,7 @@ extension View: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let collectionCell = cell as? PhotoCollectionCell, indexPath.row < self.viewModel.numberOfItemsInSection(section: indexPath.section) {
             if let imageModel = self.viewModel.getImageModel(row: indexPath.row) {
-                collectionCell.fetchImage(imageModel: imageModel)
+                collectionCell.fetchImage(imageModel: imageModel, indexPath: indexPath)
             }
         } else if cell.isKind(of: LoaderCollectionCell.self) {
             self.loadNextPageData()

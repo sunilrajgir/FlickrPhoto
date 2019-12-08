@@ -21,10 +21,10 @@ internal class ImageDownloader {
         self.operationQueue.qualityOfService = .background
     }
     
-    internal func downloadImage(url: URL, completion:@escaping((_ image:UIImage?, _ error: Error?)->Void)) {
+    internal func downloadImage(url: URL, indexPath:IndexPath, completion:@escaping((_ image:UIImage?, _ error: Error?, _ imageUrl:String, _ indPath:IndexPath)->Void)) {
         let hashKey = NSString(string: url.absoluteString)
         if let cachedData = URLCacheManager.shared.getDataForKey(key:hashKey) as? UIImage {
-            completion(cachedData, nil)
+            completion(cachedData, nil, url.absoluteString, indexPath)
         }
         
         if let op = requestInProcessHasMap[url.absoluteString] as? Operation {
@@ -34,10 +34,10 @@ internal class ImageDownloader {
                 let request = URLRequest(url: url)
                 URLSession.shared.dataTask(with: request) { [weak self](data, response, error) in
                     if let imageData = data, error == nil, let image = UIImage(data: imageData)  {
-                        completion(image, nil)
+                        completion(image, nil, url.absoluteString,indexPath)
                         URLCacheManager.shared.addDataToCache(data: image, key: hashKey)
                     } else {
-                        completion(nil, error)
+                        completion(nil, error, url.absoluteString,indexPath)
                     }
                     self?.requestInProcessHasMap.removeValue(forKey: url.absoluteString)
                 }.resume()

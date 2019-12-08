@@ -12,6 +12,9 @@ class PhotoCollectionCell: UICollectionViewCell {
    
     @IBOutlet weak var imageView: UIImageView!
     
+    var indexPath : IndexPath?
+    var requestUrl : String?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -19,12 +22,16 @@ class PhotoCollectionCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.imageView.image = nil
+        self.indexPath = nil
+        self.requestUrl = nil
     }
     
-    func fetchImage(imageModel: FlickrURLs) {
+    func fetchImage(imageModel: FlickrURLs, indexPath: IndexPath) {
+        self.indexPath = indexPath
         if let url = self.getDownloadUrl(imageModel: imageModel) {
-            ImageDownloader.shared.downloadImage(url:url) {[weak self] (image, error) in
-                if error == nil {
+            self.requestUrl = url.absoluteString
+            ImageDownloader.shared.downloadImage(url:url, indexPath: indexPath) {[weak self] (image, error, imageUrl,indPath) in
+                if error == nil && (((self?.requestUrl?.lowercased() ?? "") == imageUrl.lowercased()) && ((self?.indexPath?.row ?? 0) == indexPath.row)) {
                     DispatchQueue.main.async {
                         self?.imageView.image = image
                     }
