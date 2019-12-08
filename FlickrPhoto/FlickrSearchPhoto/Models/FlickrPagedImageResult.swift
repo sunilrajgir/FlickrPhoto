@@ -8,10 +8,10 @@
 
 import UIKit
 
-struct FlickrPagedImageResult: Codable {
-    let photo : [FlickrURLs]
-    let page: Int
-    let pages: Int
-    let perpage: Int
-    let total: String
+internal struct FlickrPagedImageResult: Codable {
+    internal let photo : [FlickrURLs]
+    internal let page: Int
+    internal let pages: Int
+    internal let perpage: Int
+    internal let total: String
 }

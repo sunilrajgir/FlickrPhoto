@@ -8,10 +8,10 @@
 
 import UIKit
 
-struct FlickrURLs: Codable {
-    let id : String
-    let owner: String
-    let secret: String
-    let server: String
-    let farm: Int
+internal struct FlickrURLs: Codable {
+    internal let id : String
+    internal let owner: String
+    internal let secret: String
+    internal let server: String
+    internal let farm: Int
 }
