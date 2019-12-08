@@ -42,10 +42,16 @@ internal class ImageDownloader {
                     self?.requestInProcessHasMap.removeValue(forKey: url.absoluteString)
                 }.resume()
             }
-            operation.qualityOfService = .background
+            operation.qualityOfService = .default
             self.requestInProcessHasMap[url.absoluteString] = operation
             self.operationQueue.addOperation(operation)
         }
+    }
+    
+    internal func downgradePriorityOfDownloadImage(url: URL, indexPath:IndexPath) {
+        if let op = requestInProcessHasMap[url.absoluteString] as? Operation {
+             op.qualityOfService = .background
+         }
     }
     
 }

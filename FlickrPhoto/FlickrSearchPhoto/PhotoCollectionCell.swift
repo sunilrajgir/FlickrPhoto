@@ -40,6 +40,12 @@ class PhotoCollectionCell: UICollectionViewCell {
         }
     }
     
+    func downgradePriorityOfImageFetch(imageModel: FlickrImageModel, indexPath: IndexPath) {
+        if let url = self.getDownloadUrl(imageModel: imageModel) {
+            ImageDownloader.shared.downgradePriorityOfDownloadImage(url:url, indexPath: indexPath)
+        }
+    }
+    
     private func getDownloadUrl(imageModel: FlickrImageModel)-> URL? {
         var imageUrl = URLManager.getImageUrl()
         imageUrl = imageUrl.replacingOccurrences(of: Constant.farm, with: "\(imageModel.farm)")

@@ -111,4 +111,12 @@ extension View: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
             self.loadNextPageData()
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let collectionCell = cell as? PhotoCollectionCell, indexPath.row < self.viewModel.numberOfItemsInSection(section: indexPath.section) {
+            if let imageModel = self.viewModel.getImageModel(row: indexPath.row) {
+                collectionCell.downgradePriorityOfImageFetch(imageModel: imageModel, indexPath: indexPath)
+            }
+        }
+    }
 }
