@@ -30,12 +30,16 @@ internal class View: UIView {
         self.controller = controller
         self.viewModel = self.controller.getViewModel()
         self.viewModel.delegate = self
-        self.collectionView.register(UINib(nibName: "PhotoCollectionCell", bundle: nil), forCellWithReuseIdentifier: "PhotoCollectionCell")
-        self.collectionView.register(UINib(nibName: "LoaderCollectionCell", bundle: nil), forCellWithReuseIdentifier: "LoaderCollectionCell")
-        self.calculateCellWidth()
+        self.setUpCollectionView()
         self.viewModel.initialSetup { () -> (Void) in
             self.setUp()
         }
+    }
+    
+    fileprivate func setUpCollectionView() {
+        self.collectionView.register(UINib(nibName: "PhotoCollectionCell", bundle: nil), forCellWithReuseIdentifier: "PhotoCollectionCell")
+        self.collectionView.register(UINib(nibName: "LoaderCollectionCell", bundle: nil), forCellWithReuseIdentifier: "LoaderCollectionCell")
+        self.calculateCellWidth()
     }
     
     fileprivate func  calculateCellWidth() {
