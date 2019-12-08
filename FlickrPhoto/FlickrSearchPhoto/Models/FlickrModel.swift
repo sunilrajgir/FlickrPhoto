@@ -9,6 +9,6 @@
 import UIKit
 
 internal struct FlickrModel: Codable {
-    internal let photos : FlickrPagedImageResult?
+    internal let photos : FlickrPagedImageModel?
     internal let stat: String
 }

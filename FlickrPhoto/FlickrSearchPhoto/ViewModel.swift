@@ -14,7 +14,7 @@ internal class ViewModel {
     private var isCollectionViewHidden =  false
     private var totalRecords = 0
     
-    private var sourceArray = [FlickrURLs]()
+    private var sourceArray = [FlickrImageModel]()
     weak var delegate: ViewModelProtocol?
     
     internal func initialSetup(completion :(()->(Void))) {
@@ -39,7 +39,7 @@ internal class ViewModel {
         }
     }
     
-    internal func getImageModel(row:Int)->FlickrURLs? {
+    internal func getImageModel(row:Int)->FlickrImageModel? {
         if row < self.sourceArray.count {
             return self.sourceArray[row]
         } else {

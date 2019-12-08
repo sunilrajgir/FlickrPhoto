@@ -1,5 +1,5 @@
 //
-//  FlickrPagedImageResult.swift
+//  FlickrPagedImageModel.swift
 //  FlickrPhoto
 //
 //  Created by sunil.kumar1 on 12/8/19.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-internal struct FlickrPagedImageResult: Codable {
-    internal let photo : [FlickrURLs]
+internal struct FlickrPagedImageModel: Codable {
+    internal let photo : [FlickrImageModel]
     internal let page: Int
     internal let pages: Int
     internal let perpage: Int

@@ -1,5 +1,5 @@
 //
-//  FlickrURLs.swift
+//  FlickrImageModel.swift
 //  FlickrPhoto
 //
 //  Created by sunil.kumar1 on 12/8/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-internal struct FlickrURLs: Codable {
+internal struct FlickrImageModel: Codable {
     internal let id : String
     internal let owner: String
     internal let secret: String

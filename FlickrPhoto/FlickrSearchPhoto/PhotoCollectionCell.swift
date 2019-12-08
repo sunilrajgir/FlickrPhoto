@@ -26,7 +26,7 @@ class PhotoCollectionCell: UICollectionViewCell {
         self.requestUrl = nil
     }
     
-    func fetchImage(imageModel: FlickrURLs, indexPath: IndexPath) {
+    func fetchImage(imageModel: FlickrImageModel, indexPath: IndexPath) {
         self.indexPath = indexPath
         if let url = self.getDownloadUrl(imageModel: imageModel) {
             self.requestUrl = url.absoluteString
@@ -40,7 +40,7 @@ class PhotoCollectionCell: UICollectionViewCell {
         }
     }
     
-    private func getDownloadUrl(imageModel: FlickrURLs)-> URL? {
+    private func getDownloadUrl(imageModel: FlickrImageModel)-> URL? {
         var imageUrl = URLManager.getImageUrl()
         imageUrl = imageUrl.replacingOccurrences(of: Constant.farm, with: "\(imageModel.farm)")
         imageUrl = imageUrl.replacingOccurrences(of: Constant.server, with: imageModel.server)
