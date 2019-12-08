@@ -115,13 +115,13 @@
 		32380869239D233D0070FE8B /* FlickrSearchPhoto */ = {
 			isa = PBXGroup;
 			children = (
+				32380893239D2E470070FE8B /* Models */,
 				32380877239D27280070FE8B /* Builder.swift */,
 				32380878239D27280070FE8B /* Controller.swift */,
 				32380884239D27BF0070FE8B /* DataFetcher.swift */,
 				32380882239D27BF0070FE8B /* Interactor.swift */,
 				32380885239D27BF0070FE8B /* LoaderCollectionCell.swift */,
 				3238087F239D27BF0070FE8B /* LoaderCollectionCell.xib */,
-				32380893239D2E470070FE8B /* Models */,
 				32380881239D27BF0070FE8B /* PhotoCollectionCell.swift */,
 				32380886239D27BF0070FE8B /* PhotoCollectionCell.xib */,
 				32380883239D27BF0070FE8B /* PhotoConnectionGateway.swift */,
@@ -139,10 +139,10 @@
 		3238086E239D25340070FE8B /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				3238086F239D25560070FE8B /* Constant.swift */,
 				3238088F239D28660070FE8B /* ImageDownloader.swift */,
 				32380890239D28660070FE8B /* URLCacheManager.swift */,
 				32380871239D258E0070FE8B /* URLManager.swift */,
-				3238086F239D25560070FE8B /* Constant.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -151,8 +151,8 @@
 			isa = PBXGroup;
 			children = (
 				32380896239D2ECD0070FE8B /* FlickrImageModel.swift */,
-				32380898239D2F0D0070FE8B /* FlickrPagedImageModel.swift */,
 				3238089A239D2F270070FE8B /* FlickrModel.swift */,
+				32380898239D2F0D0070FE8B /* FlickrPagedImageModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
