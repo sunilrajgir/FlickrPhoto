@@ -14,7 +14,7 @@ internal class ViewModel {
     private var totalRecords = 0
     
     private var sourceArray = [FlickrURLs]()
-    weak var viewDelegate: PhotoViewModelProtocol?
+    weak var delegate: ViewModelProtocol?
     
     internal func initialSetup(completion :(()->(Void))) {
         self.isCollectionViewHidden = false
@@ -44,19 +44,19 @@ internal class ViewModel {
             return nil
         }
     }
-        
+            
     internal func showData(data:Any) {
         if let photoModel = data as? FlickrModel {
             self.sourceArray = photoModel.photos!.photo
             self.totalRecords = Int(photoModel.photos?.total ?? "") ?? 0
-            self.viewDelegate?.showData()
+            self.delegate?.showData()
         }
     }
     
     internal func showNextPageData(data:Any)  {
         if let photoModel = data as? FlickrModel {
             self.sourceArray.append(contentsOf: photoModel.photos!.photo)
-            self.viewDelegate?.showData()
+            self.delegate?.showData()
         }
     }
 }

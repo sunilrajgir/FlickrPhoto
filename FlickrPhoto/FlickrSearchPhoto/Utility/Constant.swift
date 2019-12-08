@@ -19,4 +19,6 @@ internal struct Constant {
     internal static let server = "<server>"
     internal static let id = "<id>"
     internal static let secret = "<secret>"
+    // UI
+    internal static let spaceBetweenCells = 10.0
 }

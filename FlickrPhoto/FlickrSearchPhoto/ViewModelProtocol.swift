@@ -8,6 +8,6 @@
 
 import UIKit
 
-protocol PhotoViewModelProtocol: NSObject {
+protocol ViewModelProtocol: NSObject {
     func showData()
 }

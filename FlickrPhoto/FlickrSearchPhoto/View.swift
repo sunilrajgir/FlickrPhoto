@@ -8,20 +8,24 @@
 
 import UIKit
 
-class View: UIView {
+internal class View: UIView {
     @IBOutlet var collectionView: UICollectionView!
+    
+    fileprivate let spaceBetweenCells = 10.0
+    fileprivate let safeAreaSpace = 20.0
+    fileprivate let loaderCellHeight = 50.0
 
-    var controller : Controller!
-    var viewModel : ViewModel!
+    internal var controller : Controller!
+    internal var viewModel : ViewModel!
     
     override class func awakeFromNib() {
         super.awakeFromNib()
     }
     
-    func bind(controller : Controller) {
+    internal func bind(controller : Controller) {
         self.controller = controller
         self.viewModel = self.controller.getViewModel()
-        self.viewModel.viewDelegate = self
+        self.viewModel.delegate = self
         self.collectionView.register(UINib(nibName: "PhotoCollectionCell", bundle: nil), forCellWithReuseIdentifier: "PhotoCollectionCell")
         self.collectionView.register(UINib(nibName: "LoaderCollectionCell", bundle: nil), forCellWithReuseIdentifier: "LoaderCollectionCell")
         self.viewModel.initialSetup { () -> (Void) in
@@ -29,17 +33,18 @@ class View: UIView {
         }
     }
     
-    func loadNextPageData() {
+    internal func loadNextPageData() {
         self.controller?.nextPageAction()
     }
         
-    func setUp() {
+    private func setUp() {
         self.collectionView.isHidden = self.viewModel.getIsCollectionViewHidden()
     }
     
 }
 
-extension View : PhotoViewModelProtocol {
+// MARK: PhotoViewModelProtocol
+extension View : ViewModelProtocol {
     func showData() {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
@@ -65,21 +70,21 @@ extension View: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.row == self.viewModel.numberOfItemsInSection(section: indexPath.section) {
-             let width = UIScreen.main.bounds.size.width-20
-             return CGSize(width: width, height: 44)
+        if indexPath.row == (self.viewModel.numberOfItemsInSection(section: indexPath.section)-1) {
+             let width = UIScreen.main.bounds.size.width-CGFloat(2*safeAreaSpace)
+             return CGSize(width: width, height: CGFloat(loaderCellHeight))
         } else {
-            let width = (UIScreen.main.bounds.size.width-60)/3
+            let width = (UIScreen.main.bounds.size.width-CGFloat(2*safeAreaSpace)-2*CGFloat(spaceBetweenCells))/3
              return CGSize(width: width, height: width)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10.0
+        return CGFloat(spaceBetweenCells)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 10.0
+        return CGFloat(spaceBetweenCells)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -91,5 +96,4 @@ extension View: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
             self.loadNextPageData()
         }
     }
-    
 }
