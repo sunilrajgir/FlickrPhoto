@@ -24,20 +24,20 @@ internal class Interactor {
         self.flickerModel = flickerModel
     }
     
-    internal func fetchData(url: URL, completionBlock:@escaping((_ data:Any?, _ error:Error?)->Void))  {
+    internal func fetchData(url: URL, completionBlock:@escaping((_ data:Any?, _ error:Error?, _ url:URL)->Void))  {
         self.dataGateway.loadUrlContent(url: url) { (data, error) in
             if error == nil {
             do
             {
                 let flickrPhotos = try JSONDecoder().decode(FlickrModel.self, from: data!)
                 //print(flickrPhotos)
-                completionBlock(flickrPhotos, nil)
+                completionBlock(flickrPhotos, nil, url)
             } catch {
                 //print(error.localizedDescription)
-                completionBlock(nil,error)
+                completionBlock(nil,error,url)
             }
             } else {
-                completionBlock(nil,error)
+                completionBlock(nil,error,url)
             }
         }
     }

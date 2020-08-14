@@ -14,6 +14,7 @@ internal class Controller {
     
     private var currentPage = 1
     private var text : String = ""
+    private var latestUrl : String = ""
     
     init(interactor : Interactor, presenter : Presenter) {
         self.interactor = interactor
@@ -27,8 +28,11 @@ internal class Controller {
     internal func searchPhoto(text:String) {
         self.text = text
         if let url = self.getListUrl() {
-            self.interactor.fetchData(url: url) {[weak self] (data, error) in
-                self?.presenter.showFetchedData(photoModel: data, error: error)
+            self.latestUrl = url.absoluteString
+            self.interactor.fetchData(url: url) {[weak self] (data, error,responeUrl) in
+                if self?.latestUrl == responeUrl.absoluteString {
+                    self?.presenter.showFetchedData(photoModel: data, error: error)
+                }
             }
         }
     }
@@ -36,10 +40,14 @@ internal class Controller {
     internal func nextPageAction() {
         self.currentPage = currentPage+1;
         if let url = self.getListUrl() {
-            self.interactor.fetchData(url: url) {[weak self] (data, error) in
+            self.interactor.fetchData(url: url) {[weak self] (data, error,url) in
                 self?.presenter.showNextPageData(photoModel: data, error: error)
             }
         }
+    }
+    
+    internal func resetScreen() {
+        self.presenter.resetScreen()
     }
     
    private func getListUrl()->URL? {

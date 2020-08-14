@@ -26,4 +26,8 @@ internal class Presenter {
     internal func showNextPageData(photoModel:Any?, error: Error?)  {
         self.viewModel.showNextPageData(data: photoModel)
     }
+    
+    internal func resetScreen() {
+        viewModel.resetView()
+    }
 }

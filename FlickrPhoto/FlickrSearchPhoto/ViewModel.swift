@@ -63,6 +63,12 @@ internal class ViewModel {
         }
     }
     
+    internal func resetView() {
+        self.sourceArray.removeAll()
+        self.totalRecords = 0
+        self.delegate?.showData()
+    }
+    
     internal func showError(error:Error) {
         // out of score, will implement view 3 more state[loader, connection error, server error]
     }

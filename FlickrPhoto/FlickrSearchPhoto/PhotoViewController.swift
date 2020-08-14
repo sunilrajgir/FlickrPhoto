@@ -16,6 +16,7 @@ internal class PhotoViewController: UIViewController {
         super.viewDidLoad()
         self.photoView = self.view as? View
         self.photoView?.bind(controller: controller!)
+        self.searchBar.delegate = self // For typing and fetching data
         self.setUpNavigation()
     }
     
@@ -30,5 +31,15 @@ internal class PhotoViewController: UIViewController {
             self.controller?.searchPhoto(text: inputText)
         }
         self.searchBar.searchTextField.resignFirstResponder()
+    }
+}
+
+extension PhotoViewController : UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.count > 0 {
+            self.controller?.searchPhoto(text: searchText)
+        } else {
+            self.controller?.resetScreen()
+        }
     }
 }
